@@ -4,6 +4,10 @@
     {
       "name": "Install Dependencies",
       "command": "npm install"
+    },
+    {
+      "command": "npx playwright install || true",
+      "name": "npx playwright install || true"
     }
   ],
 
