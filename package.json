@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "react": "^18.3.1",
