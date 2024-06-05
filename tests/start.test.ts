@@ -1,15 +1,16 @@
 import { test, expect } from '@playwright/test'
+import { existingUsers } from '../test-setup/localstorage.setup'
 
 const password = 'dahgdfteDSdashj12'
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('localhost:8080/signup')
-})
+test.describe.configure({ mode: 'serial' })
 
 test.describe('signup form tests', () => {
   test('submit button is disabled with invalid input data', async ({
     page,
   }) => {
+    await page.goto('localhost:8080/signup')
+
     await page
       .locator('#root form div:nth-child(1) > div > input')
       .pressSequentially('John')
@@ -25,10 +26,12 @@ test.describe('signup form tests', () => {
       .locator('#root form div:nth-child(4) > div > input')
       .pressSequentially(password)
 
-    expect(page.locator('.MuiButton-sizeMedium')).toBeDisabled()
+    await expect(page.locator('.MuiButton-sizeMedium')).toBeDisabled()
   })
 
   test('signing up works for a new account', async ({ page }) => {
+    await page.goto('localhost:8080/signup')
+
     await page
       .locator('#root form div:nth-child(1) > div > input')
       .pressSequentially('John')
@@ -46,7 +49,29 @@ test.describe('signup form tests', () => {
 
     await page.locator('.MuiButton-sizeMedium').click()
 
-    expect(page.url()).toBe('http://localhost:8080/')
-    expect(page.getByText('Log out')).toBeVisible()
+    page.waitForURL('http://localhost:8080/')
+    await expect(page.getByText('Log out')).toBeVisible()
+  })
+
+  test('logging in works with existing account', async ({ page }) => {
+    await page.goto('localhost:8080/login')
+
+    console.log(await page.context().storageState())
+
+    const existingUser = existingUsers[0]
+
+    await page
+      .locator('#root form div:nth-child(1) > div > input')
+      .pressSequentially(existingUser.email)
+
+    await page
+      .locator('#root form div:nth-child(2) > div > input')
+      .pressSequentially(existingUser.password)
+
+    await page.locator('form .MuiButton-sizeMedium').click()
+
+    page.waitForURL('http://localhost:8080/')
+    console.log(await page.context().storageState())
+    await expect(page.getByText('Log out')).toBeVisible()
   })
 })

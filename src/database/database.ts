@@ -2,7 +2,7 @@ import { User } from '../App'
 
 export const key = 'users'
 
-export const createUser = (user: User): User => {
+export const createUser = async (user: User): Promise<User> => {
   const data = readDatabase()
 
   if (data.users.find((existingUser) => existingUser.email === user.email))
@@ -14,7 +14,10 @@ export const createUser = (user: User): User => {
   return user
 }
 
-export const loginUser = (email: string, password: string): User | null => {
+export const loginUser = async (
+  email: string,
+  password: string,
+): Promise<User | null> => {
   const data = readDatabase()
 
   const user = data.users.find(

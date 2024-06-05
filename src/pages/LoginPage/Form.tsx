@@ -22,7 +22,7 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
 
   const handleLogin = useCallback(async () => {
     if (validateLoginFields(email, password)) {
-      const user = loginUser(email, password)
+      const user = await loginUser(email, password)
 
       if (!user) setInvalidCredentials(true)
       else {
@@ -53,7 +53,9 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
         setPassword={setPassword}
         {...styleProps}
       />
-      {invalidCredentials && 'Invalid credentials'}
+      {invalidCredentials && (
+        <div style={{ color: 'red' }}>Invalid credentials</div>
+      )}
       <Button
         variant="contained"
         onClick={handleLogin}

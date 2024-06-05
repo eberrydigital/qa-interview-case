@@ -21,10 +21,10 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     if (validateSignupFields(firstName, lastName, email, password)) {
       console.log('creating and setting user')
-      createUser({ firstName, lastName, email, password })
+      await createUser({ firstName, lastName, email, password })
       setUser({ firstName, lastName, email, password })
     }
   }, [firstName, lastName, email, password, setUser])
