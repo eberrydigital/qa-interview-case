@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
 
 const password = 'dahgdfteDSdashj12'
 
@@ -28,7 +28,9 @@ test.describe('signup form tests', () => {
     await expect(page.locator('.MuiButton-sizeMedium')).toBeDisabled()
   })
 
-  test('signing up works for a new account', async ({ page }) => {
+  test('signing up and being logged in works for a new account', async ({
+    page,
+  }) => {
     await page.goto('localhost:8080/signup')
 
     await page
@@ -51,4 +53,20 @@ test.describe('signup form tests', () => {
     page.waitForURL('http://localhost:8080/')
     await expect(page.getByText('Log out')).toBeVisible()
   })
+
+  test('signup page contains information about company (localized)', async ({
+    page,
+  }) => {
+    await page.goto('localhost:8080/signup')
+
+    await useSwedishLanguage(page)
+
+    await expect(page.getByText('Vi är ett bra företag')).toBeVisible()
+    await expect(page.getByText('Gratis frukost!')).toBeVisible()
+  })
 })
+
+const useSwedishLanguage = async (page: Page): Promise<void> => {
+  await page.getByLabel('EN').click()
+  await page.getByRole('option', { name: 'SV' }).click()
+}
