@@ -17,9 +17,13 @@ test.describe('login form tests', () => {
       .locator('#root form div:nth-child(2) > div > input')
       .pressSequentially(existingUser.password)
 
-    await page.locator('form .MuiButton-sizeMedium').click()
+    // Submit button
+    const button = page.locator('form .MuiButton-sizeMedium')
+    // Click on the button
+    button.click()
 
-    page.waitForURL('http://localhost:8080/')
+    // Wait for 1 second until page is fully loaded
+    await page.waitForTimeout(1000)
     await expect(page.getByText('Log out')).toBeVisible()
   })
 })
