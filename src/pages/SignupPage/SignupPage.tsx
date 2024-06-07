@@ -73,7 +73,7 @@ const getLocalizedLabels = (
   switch (language) {
     case 'EN':
       return {
-        aboutTitle: 'You should just us because:',
+        aboutTitle: 'You should join us because:',
         perks: ['We are a nice company', 'Free breakfast!'],
         language: 'Language',
         login: { text: 'Already have an account?', cta: 'Login' },
