@@ -28,7 +28,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ user, setUser }) => {
     <div style={{ padding: '2rem', width: '100%' }}>
       <main>
         <h1>Company</h1>
-        <div style={{ display: 'flex', width: '100%' }}>
+        <div style={{ display: 'flex', width: '100%', marginBottom: '0.5rem' }}>
           <div style={{ width: '100%', paddingRight: '2rem' }}>
             <h2>{labels.title}</h2>
             <Form setUser={setUser} language={language} />
