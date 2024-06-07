@@ -51,6 +51,7 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
         id="password"
         password={password}
         setPassword={setPassword}
+        label={'Password'}
         {...styleProps}
       />
       {invalidCredentials && (

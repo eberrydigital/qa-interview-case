@@ -4,6 +4,7 @@ import { validateSignupFields } from '../../utils/validations'
 import { PasswordField } from '../../components/PasswordField'
 import { User } from '../../App'
 import { createUser } from '../../database'
+import { Language } from './SignupPage'
 
 const styleProps = {
   fullWidth: true,
@@ -13,9 +14,10 @@ const styleProps = {
 
 interface FormProps {
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>
+  language: Language
 }
 
-export const Form: React.FC<FormProps> = ({ setUser }) => {
+export const Form: React.FC<FormProps> = ({ setUser, language }) => {
   const [firstName, setFirstName] = useState<string>('')
   const [lastName, setLastName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -29,6 +31,8 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
     }
   }, [firstName, lastName, email, password, setUser])
 
+  const labels = getLocalizedLabels(language)
+
   return (
     <form
       style={{
@@ -39,21 +43,21 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
     >
       <TextField
         id="firstName"
-        label="First name"
+        label={labels.firstName}
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
         {...styleProps}
       />
       <TextField
         id="lastName"
-        label="Last name"
+        label={labels.lastName}
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
         {...styleProps}
       />
       <TextField
         id="email"
-        label="Email"
+        label={labels.email}
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -61,6 +65,7 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
       />
       <PasswordField
         id="password"
+        label={labels.password}
         password={password}
         setPassword={setPassword}
         {...styleProps}
@@ -70,8 +75,37 @@ export const Form: React.FC<FormProps> = ({ setUser }) => {
         onClick={handleSubmit}
         disabled={!validateSignupFields(firstName, lastName, email, password)}
       >
-        Submit
+        {labels.submit}
       </Button>
     </form>
   )
+}
+
+const getLocalizedLabels = (
+  language: Language,
+): {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  submit: string
+} => {
+  switch (language) {
+    case 'EN':
+      return {
+        firstName: 'First name',
+        lastName: 'Last name',
+        email: 'Email',
+        password: 'Password',
+        submit: 'Submit',
+      }
+    case 'SV':
+      return {
+        firstName: 'Förnamn',
+        lastName: 'Efternamn',
+        email: 'Email',
+        password: 'Lösenord',
+        submit: 'Skapa',
+      }
+  }
 }

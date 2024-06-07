@@ -15,6 +15,7 @@ interface PasswordFieldProps {
   variant: 'filled'
   password: string | undefined
   setPassword: React.Dispatch<React.SetStateAction<string>>
+  label: string
 }
 
 export const PasswordField: React.FC<PasswordFieldProps> = ({
@@ -24,12 +25,13 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
   variant,
   password,
   setPassword,
+  label,
 }) => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
     <FormControl variant={variant}>
-      <InputLabel htmlFor="password">Password</InputLabel>
+      <InputLabel htmlFor="password">{label}</InputLabel>
       <Input
         id={id}
         type={showPassword ? 'text' : 'password'}
