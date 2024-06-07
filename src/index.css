@@ -9,5 +9,49 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
+}
+
+#login-page {
+  display: flex;
+}
+
+.form-login {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+
+.login {
+  width: 30%;
+  height: 100vh;
+  background: #FFF;
+  padding: 70px;
+}
+
+.login a {
+  color: #666;
+  font-size: 14px;
+  display: block;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.background {
+  width: 70%;
+  padding: 80px;
+  height: 100vh;
+  background: rgb(255, 126, 125);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: center;
+}
+.background h1 {
+  max-width: 420px;
+  color: #FFF;
+  text-align: right;
+  padding: 0;
+  margin: 0;
 }
