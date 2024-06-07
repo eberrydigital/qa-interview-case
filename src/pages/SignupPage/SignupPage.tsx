@@ -20,7 +20,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ user, setUser }) => {
       <h1>Company</h1>
       <div style={{ display: 'flex', width: '100%' }}>
         <div style={{ width: '100%', paddingRight: '2rem' }}>
-          <h2>Signup Form</h2>
+          <h2>Signup</h2>
           <Form setUser={setUser} />
         </div>
         <div style={{ width: '100%' }}>
