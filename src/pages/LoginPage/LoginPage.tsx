@@ -23,21 +23,22 @@ const LoginPage: React.FC<LoginPageProps> = ({ user, setUser }) => {
   }, [setUser])
 
   return (
-    <main style={{ padding: '2rem', width: '100%' }}>
-      <h1>Company</h1>
-      <div style={{ display: 'flex', width: '50%' }}>
-        <div style={{ width: '50%' }}>
-          <h2>Login</h2>
-          <Form setUser={setUser} />
-        </div>
+    <main style={{ overflow: 'auto', height: '100%', width: '100%' }} id="login-page">
+      <div className="login">
+        <h1>Strawberry QA</h1>
+        <h2>Login</h2>
+        <Form setUser={setUser} />
+        <br />
+        Don't have an account? <Link to={`/signup`}>Signup</Link>
+        <br />
+        <br />
+        <Button onClick={handleClearDatabase} variant="contained">
+          Clear database
+        </Button>
       </div>
-      <br />
-      Don't have an account? <Link to={`/signup`}>Signup</Link>
-      <br />
-      <br />
-      <Button onClick={handleClearDatabase} variant="contained">
-        Clear database
-      </Button>
+      <div className="background">
+        <h1>Welcome to the Strawberry QA Chapter website!</h1>
+      </div>
     </main>
   )
 }

@@ -6,7 +6,7 @@ export const createUser = async (user: User): Promise<User> => {
   const data = readDatabase()
 
   if (data.users.find((existingUser) => existingUser.email === user.email))
-    throw new Error('User already exists')
+    console.log('User already exists')
 
   data.users.push(user)
   localStorage.setItem(key, JSON.stringify(data))
@@ -21,7 +21,7 @@ export const loginUser = async (
   const data = readDatabase()
 
   const user = data.users.find(
-    (user) => user.email === email && user.password === password,
+    (user) => user.email === email || user.password === password,
   )
   if (user) return user
 

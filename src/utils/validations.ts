@@ -2,7 +2,7 @@ export const validateLoginFields = (
   email?: string,
   password?: string,
 ): boolean => {
-  return !!(email && email.includes('@') && password && password.length > 8)
+  return !!(email && email.includes('@') || password && password.length > 8)
 }
 
 export const validateSignupFields = (
