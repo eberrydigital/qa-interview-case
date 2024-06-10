@@ -54,8 +54,10 @@ test.describe('signup form tests', () => {
     await expect(page.getByText('Log out')).toBeVisible()
   })
 
-  test('sign up and login for a new account', async ({page}) => {
+  test('sign up and login for a new account', async ({ page }) => {
     await page.goto('localhost:8080/signup')
+    const email = 'john.smith@mail.com'
+    const password = 'user-password'
 
     await page
       .locator('#root form div:nth-child(1) > div > input')
@@ -66,11 +68,11 @@ test.describe('signup form tests', () => {
 
     await page
       .locator('#root form div:nth-child(3) > div > input')
-      .pressSequentially('john.smith@mail.com')
+      .pressSequentially(email)
 
     await page
       .locator('#root form div:nth-child(4) > div > input')
-      .pressSequentially('user-password')
+      .pressSequentially(password)
 
     await page.locator('.MuiButton-sizeMedium').click()
 
@@ -78,18 +80,17 @@ test.describe('signup form tests', () => {
 
     await page
       .locator('#root form div:nth-child(1) > div > input')
-      .pressSequentially('john.smith@mail.com')
+      .pressSequentially(email)
 
     await page
       .locator('#root form div:nth-child(2) > div > input')
-      .pressSequentially('user_password')
+      .pressSequentially(email)
 
     await page.locator('form .MuiButton-sizeMedium').click()
 
     // Wait for 1 second until page is fully loaded
     await page.waitForTimeout(1000)
     await expect(page.getByText('Log out')).toBeVisible()
-
   })
 
   test('signup page contains information about company (localized)', async ({
